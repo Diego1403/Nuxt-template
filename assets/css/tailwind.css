@@ -1,0 +1,8 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.botm{
+    background-color: #6c63ff;
+    color: #6c63ff
+}
