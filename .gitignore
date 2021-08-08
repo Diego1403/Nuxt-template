@@ -1,3 +1,6 @@
 node_modules
 node_modules
 node_modules
+.nuxt/routes.json
+.gitignore
+.firebase/hosting.ZGlzdA.cache
