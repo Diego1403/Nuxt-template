@@ -1,5 +1,5 @@
 module.exports = {
-  prefix: '',
+  prefix: 'tw-',
   purge: {
       content: [
         './components/**/*.{vue,js}',
@@ -15,7 +15,7 @@ module.exports = {
       }
   },
   plugins: [
-  
+    require('daisyui'),
   ],
   theme: {
     extend: {},

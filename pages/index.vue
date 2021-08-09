@@ -1,15 +1,15 @@
 <template>
-  <div>    
-    <teaser/>
-  </div>
+  <tutorial/>
 </template>
 
 <script>
-import Teaser from '~/components/Teaser.vue'
-
-
-
+import Tutorial from '../components/Tutorial.vue'
 export default {
-  components: { Teaser },
+  components: { Tutorial },
+
 }
 </script>
+
+<style>
+
+</style>

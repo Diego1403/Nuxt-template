@@ -1,43 +1,44 @@
 export default {
+  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  ssr: false,
 
-  mode: 'universal',
-  /*
-   ** Headers of the page
-   */
+  // Target: https://go.nuxtjs.dev/config-target
+  target: 'static',
+
+  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'diegovasquezrevilla.com',
+    htmlAttrs: {
+      lang: 'en'
+    },
     meta: [
       { charset: 'utf-8' },
-      { hid: 'description', name: 'description', content: ' ' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#6c63ff' }
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-    { rel: "stylesheet", type: "text/css" }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
-   script: [
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' },
-    { src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js' },
-  ],
+   loading: { color: '#fff' },
+  // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
+
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
+
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-analytics',
-    
   ],
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID, // Use as fallback if no runtime config is provided
@@ -47,6 +48,7 @@ export default {
       id: process.env.GOOGLE_ANALYTICS_ID
     }
   },
+  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxt/http',
     'nuxt-svg-loader',
@@ -55,14 +57,14 @@ export default {
       '@nuxtjs/firebase',
       {
         config: {
-          apiKey: " ",
-          authDomain: " ",
-          databaseURL: " ",
-          projectId: " ",
-          storageBucket: " ",
-          messagingSenderId: " ",
-          appId: " ",
-          measurementId: " "
+          apiKey: "",
+          authDomain: "",
+          databaseURL: "",
+          projectId: "",
+          storageBucket: "",
+          messagingSenderId: "",
+          appId: "",
+          measurementId: ""
       
         },
         services: {
@@ -74,23 +76,23 @@ export default {
   ],
   seo: {
     // Module options
-    baseUrl: ' ',
-    name: ' ',
-    title: ' ',
+    baseUrl: '',
+    name: 'basic template',
+    title: 'basic template',
     templateTitle: '%title%',
-    description:  '',
-    canonical: 'https://www.github.com/',
-    keywords: ['template','vue'],
+    description: 'a basic nuxt-tailwind template with seo firebase daisy ui and other basic plugins',
+    canonical: 'www.github.com',
+    keywords: ['template','nuxt'],
     isForcedTrailingSlash: false,
     
     facebook: {
-      handle: '@diegovasq14',
-      site: '@diegovasq14',
+      handle: '@nuxt',
+      site: '@nuxt',
       cardType: 'summary_large_image',
     },
   },
   googleAnalytics: {
-    id: ""
+    id: "G-"
   },
 
   axios: {
@@ -104,16 +106,14 @@ export default {
   /*
    ** Build configuration
    */
+
+  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {
-      loaders: {
-        file: {
-          esModule: false
-        }
-      }
+    babel: {
+      plugins: [
+        // https://github.com/nuxt/nuxt.js/issues/9224#issuecomment-830577523
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ],
     }
   }
 }

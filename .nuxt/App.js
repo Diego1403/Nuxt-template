@@ -1,16 +1,16 @@
 import Vue from 'vue'
+import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } from 'ufo'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-
+import NuxtError from './components/nuxt-error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
-import '..\\assets\\css\\tailwind.css'
+import '..\\node_modules\\@nuxtjs\\tailwindcss\\dist\\runtime\\tailwind.css'
 
-import _5fa3735e from '..\\layouts\\dashboard.vue'
-import _6f6c098b from '..\\layouts\\default.vue'
+import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_dashboard": sanitizeComponent(_5fa3735e),"_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
@@ -64,7 +64,8 @@ export default {
   },
   created () {
     // Add this.$nuxt in child instances
-    Vue.prototype.$nuxt = this
+    this.$root.$options.$nuxt = this
+
     if (process.client) {
       // add to window so we can listen when ready
       window.$nuxt = this
@@ -95,6 +96,10 @@ export default {
 
     isFetching () {
       return this.nbFetching > 0
+    },
+
+    isPreview () {
+      return Boolean(this.$options.previewData)
     },
   },
 
@@ -158,15 +163,24 @@ export default {
       }
       this.$loading.finish()
     },
-
     errorChanged () {
-      if (this.nuxt.err && this.$loading) {
-        if (this.$loading.fail) {
-          this.$loading.fail(this.nuxt.err)
+      if (this.nuxt.err) {
+        if (this.$loading) {
+          if (this.$loading.fail) {
+            this.$loading.fail(this.nuxt.err)
+          }
+          if (this.$loading.finish) {
+            this.$loading.finish()
+          }
         }
-        if (this.$loading.finish) {
-          this.$loading.finish()
+
+        let errorLayout = (NuxtError.options || NuxtError).layout;
+
+        if (typeof errorLayout === 'function') {
+          errorLayout = errorLayout(this.context)
         }
+
+        this.setLayout(errorLayout)
       }
     },
 

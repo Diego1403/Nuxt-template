@@ -2,7 +2,7 @@ import createApp from './app.js'
 
 import analyticsService from './service.analytics.js'
 
-const appConfig = {"apiKey":" ","authDomain":" ","databaseURL":" ","projectId":" ","storageBucket":" ","messagingSenderId":" ","appId":" ","measurementId":" "}
+const appConfig = {"apiKey":"","authDomain":"","databaseURL":"","projectId":"","storageBucket":"","messagingSenderId":"","appId":"","measurementId":""}
 
 export default async (ctx, inject) => {
   const { firebase, session } = await createApp(appConfig, ctx)
