@@ -1,5 +1,5 @@
-# diegovasquezrevilla.com
 
+a basic nuxt-tailwind template with seo firebase daisy ui and other basic plugins
 ## Build Setup
 
 ```bash
